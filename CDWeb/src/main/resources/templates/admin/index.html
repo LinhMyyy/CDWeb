@@ -1,0 +1,100 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <!-- Dashboard V.1 | Nalika - Material Admin Template -->
+    <title>Admin Simple Store</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+
+<body>
+<!-- NƠI GẮN LINK VÀO -->
+<div th:insert="~{admin/linkAdm :: links_admin}"></div>
+
+
+<div th:insert="~{admin/header :: header_admin}"></div>
+
+
+<!-- Mobile Menu start -->
+
+<div class="all-content-wrapper product-status mg-b-30">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="product-status-wrap">
+                <h4>Danh sách sản phẩm</h4>
+
+                <div class="add-product">
+                    <a th:href="@{/admin-productAdd}">Thêm sản phẩm </a>
+                </div>
+                <table>
+
+                    <tr>
+                        <th>Id</th>
+                        <th>Hình ảnh</th>
+                        <th>Tên</th>
+                        <th>Loại</th>
+                        <th>Thương hiệu</th>
+                        <th>Giảm</th>
+                        <th>Giá gốc</th>
+                        <th>Số lượng</th>
+                        <th>HOT</th>
+                        <th>New</th>
+                        <th>Mô tả</th>
+                        <th>Thao tác</th>
+                    </tr>
+                    <div th:each="product : ${listproduct}">
+                        <tr>
+                            <td><p th:text="${product.id}"></p></td>
+                            <td><a href="#"
+                                   class="single-banner-image-wrapper"> <img style="width: 1350px" alt=""
+                                                                             th:src="@{${product.mediaList[0].path}}"/>
+                            </a></td>
+                            <td><p th:text="${product.title}"></p></td>
+                            <td><p th:text="${product.category.name}"></p></td>
+                            <td><p th:text="${product.publisher}"></p></td>
+                            <td><p th:text="${product.discountFormat}"></p></td>
+                            <td><p th:text="${product.priceFormat}"></p></td>
+                            <td><p th:text="${product.quantity}"></p></td>
+                            <th:block th:if="${product.hotProduct}">
+                                <td><p>X</p></td>
+                            </th:block>
+                            <th:block th:unless="${product.hotProduct}">
+                                <td><p></p></td>
+                            </th:block>
+                            <th:block th:if="${product.newProduct}">
+                                <td><p>X</p></td>
+                            </th:block>
+                            <th:block th:unless="${product.newProduct}">
+                                <td><p></p></td>
+                            </th:block>
+                            <td><p th:text="${product.description}"></p></td>
+
+                            <td><a th:href="@{/admin-productEdit(id=${product.id})}">
+                                <button
+                                        data-toggle="tooltip" title="Chỉnh sửa" class="pd-setting-ed">
+                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                </button>
+                            </a> <a onclick="return confirm('Bạn có chắc muốn xóa sản phẩm này không?')"
+                                    th:href="@{/admin-productDelete(id=${product.id})}">
+                                <button
+                                        data-toggle="tooltip" title="Xóa sản phẩm" class="pd-setting-ed">
+                                    <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                </button>
+                            </a></td>
+                        </tr>
+                    </div>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div th:insert="~{admin/footer :: footer_admin}"></div>
+</body>
+
+</html>

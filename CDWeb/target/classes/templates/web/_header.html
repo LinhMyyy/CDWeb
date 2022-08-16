@@ -1,0 +1,169 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Header</title>
+</head>
+<body>
+
+<div class="header" th:fragment="header">
+
+    <section class="top-link clearfix">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <ul class="nav navbar-nav topmenu-contact pull-left hidden-xs hidden-sm">
+                       <a th:href="@{/}"><img th:src="@{web/shop292/images/simple.png}" class="img-responsive" style="height: 40px;margin-top: 0px; width: 105px;"></a>
+                    </ul>
+                    <ul class="nav navbar-nav topmenu-contact pull-left hidden-xs hidden-sm">
+                        <li><i class=""></i> <span>Hotline: 0800 028 0020</span></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right topmenu " id="header">
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="header-banner">
+        <img th:src="@{web/shop292/images/banner.jpg}" class="img-responsive" style="height:250px;">
+    </section>
+
+    <section class="navigation-menu clearfix">
+        <div class="container">
+            <div class="menu-top">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="menu-cate menu-quick-select">
+                            <div class="menu-cate-title">
+                                    <span><i class="fa fa-th-list"></i><a
+                                            th:href="@{/san-pham}">Danh mục sản phẩm</a></span>
+                                <i class="fa fa-chevron-circle-down"></i>
+                            </div>
+                            <ul class="menu-cate-content" id="category-load" style='font: 14px Tahoma'>
+
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-9 ">
+                        <nav class="navbar nav-menu">
+                            <div class="navbar-header">
+                                <button class="navbar-toggle collapsed" type="button" data-toggle="collapse"
+                                        data-target="#mobile-menu" aria-controls="mobile-menu"
+                                        aria-expanded="false">
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                </button>
+                            </div>
+                            <nav id="mobile-menu" class="mobile-menu collapse navbar-collapse">
+                                <ul class='menu nav navbar-nav'>
+                                    <li class="level0" style="width: 165px;"><a class='' th:href="@{/}"><span>Trang chủ</span></a></li>
+                                    <li class="level0" style="width: 165px;"><a class=''th:href="@{/gioi-thieu}"><span>Về chúng tôi</span></a></li>
+                                    <li class="level0" style="width: 165px;"><a class='' th:href="@{/san-pham}"><span>Sản phẩm</span></a></li>
+									<li class="level0" style="width: 165px;"><a class='' th:href="@{/lien-he}"><span>Liên hệ</span></a></li>
+                                    <li class="level0" style="width: 165px;"><a class='' th:href="@{/dich-vu}"><span>Dịch vụ</span></a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $.ajax(
+                {
+                    method: 'get',
+                    url: 'user',
+                    dataType: 'json',
+                    cache: 'false'
+                }
+            ).done(function (user) {
+                var str = "";
+                str += " <li class='order-check'>";
+                str += "<a href='/kiem-tra-don-hang'>";
+                str += "<i class='fa fa-pencil-square-o'></i> Kiểm tra đơn hàng</a>"
+                str += "</li>";
+
+                str += "   <li class='order-cart'>";
+                str += "    <a href='/gio-hang'>";
+                str += "       <i class='fa fa-shopping-cart'></i> Giỏ hàng";
+                str += " </a>";
+                str += " </li>";
+                if (user) {
+                    for (let i of user.roleList){
+                        if(i.name=="ROLE_ADMIN"){
+                            str += "<li class='account-login'>";
+                            str += "  <a href='/admin'>Admin</a>";
+                            str += " </li>";
+                        }
+                    }
+                    str += "<li class='account-login'>";
+                    str += "  <a href='/thong-tin-ca-nhan'>Xin chào,<i>" + user.fullName + "</i></a>";
+                    str += " </li>";
+                    str += " <li class='account-login'>";
+                    str += "   <a href='/dang-xuat'>";
+                    str += "     <i class='fa fa-sign-in'></i>";
+                    str += "  </a>";
+                    str += "</li>";
+                } else {
+                    str += "    <li class='account-login'>";
+                    str += "     <a href='/dang-nhap'>";
+                    str += "      <i class='fa fa-sign-in'></i> Đăng nhập";
+
+                    str += "  </a>";
+                    str += "</li>";
+                    str += "   <li class='account-register'>";
+                    str += "      <a href='/dang-ki'>";
+                    str += "    <i class='fa fa-key'></i> Đăng ký";
+
+                    str += "   </a>";
+                    str += " </li>";
+
+                }
+                $('#header').html(str);
+            });
+        });
+
+        $(document).ready(function () {
+            //dòng này minh dùng để load data
+            loadData();
+        });
+
+        function loadData() {
+            $.ajax({
+                url: '/getCategory',
+                type: 'get',
+                success: function (rs) {
+                    var str = "";
+                    $.each(rs, function (index, category) {
+                        str += " <li>";
+                        str += "  <a href='/san-pham?category=" + category.code + "'>";
+                        str += category.name;
+                        //str += "<i class='icon-menu fa fa-book' > " +  category.name + "</i>";
+                        str += "</a>";
+                        str += "</li>";
+
+                    });
+                    $('#category-load').html(str);
+                }
+            });
+        }
+
+    </script>
+</div>
+
+</body>
+</html>
+
+
+
+

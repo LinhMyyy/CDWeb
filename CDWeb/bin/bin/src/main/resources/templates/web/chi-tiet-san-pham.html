@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+
+<!-- Mirrored from runecom50.runtime.vn/san-pham/cam-chuong-hong.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 12 Jun 2021 14:48:08 GMT -->
+<!-- Added by HTTrack -->
+<meta http-equiv="content-type" content="text/html;charset=utf-8"/><!-- /Added by HTTrack -->
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+    <meta charset="UTF-8"/>
+    <title>Chi tiết sản phẩm</title>
+    <meta name="description"/>
+    <meta name="keywords"/>
+    <link th:href="@{web/shop292/files/icon.png}" rel="shortcut icon" type="image/x-icon"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="fb:app_id" content="227481454296289"/>
+
+    <meta content="vi_VN" property="og:locale"/>
+    <meta content="website" property="og:type"/>
+    <meta content="Book Store NLU" property="og:title"/>
+    <meta property="og:description"/>
+    <meta content="http://runecom50.runtime.vn" property="og:image"/>
+    <meta content="http://runecom50.runtime.vn/trang-chu.html" property="og:url"/>
+    <meta property="og:site_name"/>
+
+    <link th:href="@{web/Scripts/bootstrap/css/bootstrap.min.css}" rel="stylesheet"/>
+    <link th:href="@{web/App_Themes/font-awesome.min.css}" rel="stylesheet"/>
+    <link th:href="@{web/App_Themes/common.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{web/App_Themes/animate.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{web/Scripts/jQuery-ui/jquery-ui.min.css}" rel="stylesheet" type="text/css"/>
+
+    <script th:src="@{web/Scripts/jQuery/jquery-2.1.4.min.js}" type="text/javascript"></script>
+    <script th:src="@{web/Scripts/jQuery/jquery-migrate-1.2.1.min.js}" type="text/javascript"></script>
+    <script th:src="@{web/Scripts/bootstrap/js/bootstrap.min.js}"></script>
+    <script th:src="@{web/Scripts/jQuery-ui/jquery-ui.min.js}" type="text/javascript"></script>
+
+    <script th:src="@{web/Scripts/lazyLoad/jquery.lazyload.min.js}" type="text/javascript"></script>
+
+    <link th:href="@{web/App_Themes/RUN003C4/style.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{web/App_Themes/RUN003/responsive.css}" rel="stylesheet" type="text/css"/>
+    <script th:src="@{web/Scripts/myJS/ajax-san-pham.js}"></script>
+
+</head>
+<body ng-app="appMain" style="">
+
+
+<div class="wrapper">
+
+    <div th:insert="~{web/_header :: header}"></div>
+
+    <div class="main">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+
+                    <!--Begin-->
+                    <div class="box-sale-policy">
+                        <h3><span>Chính sách bán hàng</span></h3>
+                        <div class="sale-policy-block">
+                            <ul>
+                                <li>Giao hàng TOÀN QUỐC</li>
+                                <li>Thanh toán khi nhận hàng</li>
+                                <li>Đổi trả trong <span>15 ngày</span></li>
+                                <li>Hoàn ngay tiền mặt</li>
+                                <li>Chất lượng đảm bảo</li>
+                                <li>Miễn phí vận chuyển:<span>Đơn hàng từ 3 món trở lên</span></li>
+                            </ul>
+                        </div>
+                        <div class="buy-guide">
+                            <h3>Hướng Dẫn Mua Hàng</h3>
+                            <ul>
+                                <li>
+                                    Mua hàng trực tiếp tại website
+                                    <b>http://www.runtime.vn</b>
+                                </li>
+                                <li>
+                                    Gọi điện thoại <strong>
+                                    0989.250 270
+                                </strong> để mua hàng
+                                </li>
+                                <li>
+                                    Mua tại Trung tâm CSKH:<br/>
+                                    <strong>33 Phan Tây Hồ, P.7, Q.Phú Nhuận, Tp.HCM </strong>
+                                </li>
+                                <li>
+                                    Mua sỉ/buôn xin gọi <strong>
+                                    0989.250 270
+                                </strong> để được
+                                    hỗ trợ.
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-9" id="product-detail">
+                </div>
+            </div>
+            <div id="information"></div>
+            <div>
+                <link th:href="@{web/Scripts/owl-carousel/owl.carousel.css}" rel="stylesheet"/>
+                <link th:href="@{web/Scripts/owl-carousel/owl.theme.css}" rel="stylesheet"/>
+                <script th:src="@{web/Scripts/owl-carousel/owl.carousel.min.js}"></script>
+                <section class="product-content">
+                    <h1 class="title clearfix"><span>Sản phẩm HOT</span></h1>
+                    <div class=" owl-carousel">
+                        <div class="product-slide">
+                            <div class="product-block product-grid clearfix" id="product-slide">
+
+                            </div>
+                            <div class="controls boxprevnext">
+                                <a class="prev prevlogo"><i class="fa fa-angle-left"></i></a>
+                                <a class="next nextlogo"><i class="fa fa-angle-right"></i></a>
+                            </div>
+                            <div class="text-center ">
+                                <a class="btn btn-default button-see-more" th:href="@{/san-pham(hot=true)}">Xem
+                                    thêm</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <div th:insert="~{web/_footer :: footer}"></div>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".menu-quick-select ul").hide();
+            $(".menu-quick-select").hover(function () {
+                $(".menu-quick-select ul").show();
+            }, function () {
+                $(".menu-quick-select ul").hide();
+            });
+        });
+    </script>
+</div>
+
+
+<a class="back-to-top" href="#" style="display: inline;">
+    <i class="fa fa-angle-up">
+    </i>
+</a>
+
+
+</body>
+
+</html>
+<script type="text/javascript">
+    $(".header-content").css({"background": 'url(web/shop292/images/DLF.jpg)  top center'});
+    $("html").addClass('');
+    $(document).ready(function () {
+        $("img.lazy-img").each(function () {
+            //$(this).attr("data-original", $(this).attr("src"));
+            //$(this).attr("src", "/Images/blank.gif");
+        });
+        $("img.lazy-img").lazyload({
+            effect: "fadeIn",
+            threshold: 200
+        });
+    });
+
+
+    $(document).ready(function () {
+        $.ajax({
+            method: "get",
+            url: "danh-sach-san-pham?hot=true&limit=12",
+            dataType: 'json',
+            cache: 'false'
+        }).done(function (rs) {
+            var str = "";
+            for (let book of rs.listResult) {
+                str += " <div class='product-item-box  '>";
+                str += "     <div class='product-item'>";
+                str += "      <div class='image image-resize'>";
+                str += "        <a href='/chi-tiet-san-pham?id=" + book.id + "'>";
+                str += "    <img class='img-responsive' style='height: 152px' src='" + book.mediaList[0].path + "'/>";
+                str += "  </a>";
+                str += "<span class='hot'>";
+                str += book.discount ? book.discountFormat : "Hot" + "</span>";
+                str += "   </div>";
+                str += " <div class='right-block'>";
+                str += "  <h2 class='name'>";
+                str += "     <a href='/chi-tiet-san-pham?id=" + book.id + "'>" + book.title + "</a>";
+                str += "  </h2>";
+                str += " <div class='rating'>";
+                str += "   <div class='rating-1'>";
+                str += "     <span class='rating-img'>";
+                str += "   </span>";
+                str += " </div>";
+                str += "  </div>";
+                if (book.quantity) {
+                    str += " <div class='price'>";
+                    str += "   <div><span class='price-old'>";
+                    str += book.discount ? book.priceFormat : "" + "</span>";
+                    str += "   </div>";
+                    str += " <div><span class='price-new'>" + book.priceDiscount;
+                    str += " </span>";
+                    str += "</div>";
+                    str += "</div>";
+                    str += "  <div class='button'>";
+                    str += " <a class='btn btn-default' href='/thanh-toan?id=" + book.id + "'>Mua ngay</a>";
+                    str += "  <a class='btn btn-default'";
+                    str += "onclick=' addCart(" + book.id + ")' >Thêm giỏ hàng</a>";
+                    str += "</div>";
+                } else {
+                    str += "   <div class='price'>";
+                    str += "   <div><span class='price-old'></span>";
+                    str += "   </div>";
+                    str += " <div> <span class='price-new'>Hết hàng</span>";
+                    str += " </div>";
+                    str += " </div>";
+                    str += "  <div class='button'>";
+                    str += "<a></a>";
+                    str += " <a class='btn btn-default' href='/chi-tiet-san-pham?id=" + book.id + "'>Chi tiết sản phẩm</a>";
+                    str += " </div>";
+                }
+                str += " </div>";
+                str += " </div>";
+                str += " </div>";
+            }
+            $('#product-slide').html(str);
+
+
+            var owlproductslide2 = $("#product-slide");
+            owlproductslide2.owlCarousel({
+                autoPlay: true,
+                autoPlay: 5000,
+                items: 6,
+                slideSpeed: 1000,
+                pagination: false,
+                itemsDesktop: [1200, 6],
+                itemsDesktopSmall: [980, 3],
+                itemsTablet: [767, 2],
+                itemsMobile: [480, 1]
+            });
+            $(".product-slide .nextlogo").click(function () {
+                owlproductslide2.trigger('owl.next');
+            })
+            $(".product-slide .prevlogo").click(function () {
+                owlproductslide2.trigger('owl.prev');
+            })
+
+
+        });
+    });
+
+    $(document).ready(function () {
+        $.ajax({
+            method: "get",
+            url: "thong-tin-san-pham" + window.location.search,
+            dataType: 'json',
+            cache: 'false'
+        }).done(function (book) {
+            var str = "";
+
+            str += "<div class='breadcrumb clearfix'>";
+            str += "   <ul>";
+            str += "    <li class='home'>";
+            str += "       <a href='/'><span>Trang chủ</span></a>";
+            str += " </li>";
+            str += "  <li class='icon-li'><strong>Sản phẩm</strong></li>";
+            str += "  <li class='icon-li'><strong>" + book.title + "</strong></li>";
+            str += " </ul>";
+            str += "  </div>";
+            str += " <div class='product-detail clearfix relative'>";
+            str += "  <div class='product-block clearfix'>";
+            str += "     <div class='row'>";
+            str += "       <div class='col-md-7 col-sm-6 col-xs-12 product-image clearfix'>";
+            str += "       <div class='sp-wrap'>";
+            str += "      <a href='#' ><img src='" + book.mediaList[0].path + "' style='width: 455px'></a>";
+            str += "  </div>";
+            str += "  </div>";
+            str += " <div class='col-md-5 col-sm-6 col-xs-12 clearfix'>";
+            str += "    <h2>" + book.title + "</h2>";
+
+
+            if (book.quantity) {
+                str += " <div class='price'>";
+                str += "  <div>";
+                str += "<span class='price-old' style='color: #aaaaaa;text-decoration: line-through;padding: 0px 5px'>";
+                str += book.discount ? book.priceFormat : "" + "</span>"
+                str += "</div>";
+                str += "   <div><span class='price-new'>" + book.priceDiscount + "</span></div> ";
+                str += "  </div>";
+                str += "  <div class='button'>";
+                str += "  <a class='btn btn-primary btn-lg' style='width: 345px;font-size: 17px' href='/thanh-toan?id=" + book.id + "'><i class='glyphicon glyphicon-ok'></i>Mua ngay</a>";
+                str += "  <a class='btn btn-default btn-lg' style='width: 345px;font-size: 17px' onclick=' addCart(" + book.id + ")'><i class='glyphicon glyphicon-shopping-cart'></i>Thêm giỏ hàng</a>";
+                str += "   </div>";
+            } else {
+                str += " <div class='price'>";
+                str += "   <div><span class='price-new'>Hết hàng</span></div> ";
+                str += "  </div>";
+            }
+
+            str += "   </div>";
+            str += "  </div>";
+            str += "  </div>";
+            str += " </div>";
+
+            var str1 = "";
+            str1 += "<div class='product-tabs' style='margin-top: 30px'>";
+            str1 += "   <ul class='nav nav-tabs'>";
+            str1 += "  <li class='ng-scope active'>";
+            str1 += "   <a class='ng-binding'>Chi tiết sản phẩm</a>";
+            str1 += "   </li>";
+            str1 += "  </ul>";
+            str1 += "  <div class='tab-content'>";
+            str1 += " <div class='tab-pane fade in ng-scope active' style='font-size: 17px'>";
+            str1 += "<div>";
+            str1 += "  <table class='table'>";
+            str1 += " <tbody>";
+            str1 += "  <tr>";
+            str1 += "    <th scope='row'>Nhà xuất bản</th>";
+            str1 += "    <td>" + book.publisher + "</td>";
+            str1 += "  </tr>";
+            str1 += "  <tr>";
+            str1 += "    <th scope='row'>Danh mục sản phẩm</th>";
+            str1 += "    <td>" + book.category.name + "</td>";
+            str1 += "  </tr>";
+            str1 += "  <tr>";
+            str1 += "    <th scope='row'>Tác giả</th>";
+            str1 += "    <td></td>";
+            str1 += "  </tr>";
+            str1 += "  <tr>";
+            str1 += "    <th scope='row'>Số trang</th>";
+            str1 += "    <td>" + book.page + "</td>";
+            str1 += "  </tr>";
+            str1 += "  <tr>";
+            str1 += "    <th scope='row'></th>";
+            str1 += "    <td></td>";
+            str1 += "  </tr>";
+            str1 += "  </tbody>";
+            str1 += "</table>";
+            str1 += "</div>";
+            str1 += "  <div class='ng-binding'>" + book.description + "</div>";
+            str1 += " </div>";
+            str1 += "  </div>";
+            str1 += "  </div>";
+
+
+            $('#product-detail').html(str);
+            $('#information').html(str1);
+        });
+    });
+
+
+</script>

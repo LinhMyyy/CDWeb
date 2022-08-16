@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+
+<!-- Mirrored from runecom50.runtime.vn/dang-ky.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 05 Apr 2021 10:04:10 GMT -->
+<!-- Added by HTTrack -->
+<meta http-equiv="content-type" content="text/html;charset=utf-8"/><!-- /Added by HTTrack -->
+<head>
+    <meta content="text/html; charset=utf-8"/>
+    <meta charset="UTF-8"/>
+    <title>Thông tin cá nhân</title>
+    <meta name="description"/>
+    <meta name="keywords"/>
+    <link th:href="@{web/shop292/files/simple.png}" rel="shortcut icon" type="image/x-icon"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="fb:app_id" content="227481454296289"/>
+
+    <meta content="vi_VN" property="og:locale"/>
+    <meta content="website" property="og:type"/>
+    <meta content="Simple Store" property="og:title"/>
+    <meta property="og:description"/>
+    <meta content="http://runecom50.runtime.vn" property="og:image"/>
+    <meta content="http://runecom50.runtime.vn/trang-chu.html" property="og:url"/>
+    <meta property="og:site_name"/>
+
+    <link th:href="@{web/Scripts/bootstrap/css/bootstrap.min.css}" rel="stylesheet"/>
+    <link th:href="@{web/App_Themes/font-awesome.min.css}" rel="stylesheet"/>
+    <link th:href="@{web/App_Themes/common.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{web/App_Themes/animate.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{web/Scripts/jQuery-ui/jquery-ui.min.css}" rel="stylesheet" type="text/css"/>
+
+    <script th:src="@{web/Scripts/jQuery/jquery-2.1.4.min.js}" type="text/javascript"></script>
+    <script th:src="@{web/Scripts/jQuery/jquery-migrate-1.2.1.min.js}" type="text/javascript"></script>
+    <script th:src="@{web/Scripts/bootstrap/js/bootstrap.min.js}"></script>
+    <script th:src="@{web/Scripts/jQuery-ui/jquery-ui.min.js}" type="text/javascript"></script>
+
+    <script th:src="@{web/Scripts/lazyLoad/jquery.lazyload.min.js}" type="text/javascript"></script>
+    <link th:href="@{web/App_Themes/RUN003C4/style.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{web/App_Themes/RUN003/responsive.css}" rel="stylesheet" type="text/css"/>
+</head>
+<body ng-app="appMain" style="">
+
+
+<div class="wrapper">
+
+    <div th:insert="~{web/_header :: header}"></div>
+
+
+    <div class="main">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="menu-account">
+                        <h3>
+        <span>
+            Tài khoản
+        </span>
+                        </h3>
+                        <!--                        <ul>-->
+                        <!--                            <li><a th:href="@{/dang-nhap}"><i class="fa fa-sign-in"></i>Đăng nhập</a></li>-->
+                        <!--                            <li><a th:href="@{/dang-ki}"><i class="fa fa-key"></i>Đăng ký</a></li>-->
+                        <!--                            <li><a th:href="@{/quen-mat-khau}"><i class="fa fa-key"></i>Quên mật khẩu</a></li>-->
+                        <!--                        </ul>-->
+                    </div>
+                </div>
+                <div class="col-md-9">
+
+                    <div class="breadcrumb clearfix">
+                        <ul>
+                            <li itemtype="http://shema.org/Breadcrumb" itemscope="" class="home">
+                                <a title="Đến trang chủ" href="index.html" itemprop="url"><span itemprop="title">Trang chủ</span></a>
+                            </li>
+                            <li class="icon-li"><strong>Thông tin tài khoản</strong></li>
+                        </ul>
+                    </div>
+                    <div class="register-content clearfix">
+                    </div>
+
+
+                    <form th:action="@{/change-information}" method="post" th:object="${user}">
+                        <table class="table product-list">
+                            <tbody id="user">
+
+                            </tbody>
+                        </table>
+                    </form>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div th:insert="~{web/_footer :: footer}"></div>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".menu-quick-select ul").hide();
+            $(".menu-quick-select").hover(function () {
+                $(".menu-quick-select ul").show();
+            }, function () {
+                $(".menu-quick-select ul").hide();
+            });
+        });
+    </script>
+</div>
+
+
+<a class="back-to-top" href="#" style="display: inline;">
+    <i class="fa fa-angle-up">
+    </i>
+</a>
+
+
+</body>
+
+</html>
+<script type="text/javascript">
+    $(".header-content").css({"background": 'url(web/shop292/images/DLF.jpg)  top center'});
+    $("html").addClass('');
+    $(document).ready(function () {
+        $("img.lazy-img").each(function () {
+            //$(this).attr("data-original", $(this).attr("src"));
+            //$(this).attr("src", "/Images/blank.gif");
+        });
+        $("img.lazy-img").lazyload({
+            effect: "fadeIn",
+            threshold: 200
+        });
+    });
+    $(document).ready(function () {
+        $.ajax(
+            {
+                method: 'get',
+                url: 'user',
+                dataType: 'json',
+                cache: 'false'
+            }
+        ).done(function (user) {
+            var str = "";
+
+            str += " <tr>";
+            str += "    <td class='control-label'>Email:</td>";
+            str += "   <td>" + user.email;
+            str += "<input type='hidden' name='email' value='" + user.email + "'>";
+            str += "</td>";
+            str += "  </tr>";
+            str += "   <tr>";
+            str += "      <td class='control-label'>Họ và tên:</td>";
+            str += "    <td>";
+            str += "<input type='text' name='fullName' value=' " + user.fullName + "'>";
+            str += "</td>";
+            str += "  </tr>";
+            str += "   <tr>";
+            str += "    <td class='control-label'>Địa chỉ:</td>";
+            str += "    <td>";
+            str += "<input type='text' name='address' value=' " + user.address + "'>";
+            str += "</td>";
+            str += " </tr>";
+            str += "  <tr>";
+            str += "     <td class='control-label'>Số điện thoại:</td>";
+            str += "    <td>";
+            str += "<input type='text' name='phone' value=' " + user.phone + "'>";
+            str += "</td>";
+            str += " </tr>";
+            str += "<tr>";
+            str += "<td></td>";
+            str += "<td>";
+            str += "<a style='margin-right: 10px'><button type='submit' class='btn btn-default'>Lưu thông tin</button></a>"
+            str += "<a style='margin-right: 10px' class='btn btn-default' href='/thong-tin-ca-nhan'>Hủy</a>";
+            str += "<a href='/doi-mat-khau' style='color: #eb5858'>Đổi mật khẩu</a>";
+            str += "</td>"
+            str += "</tr>"
+            $('#user').html(str);
+        });
+    });
+
+</script>

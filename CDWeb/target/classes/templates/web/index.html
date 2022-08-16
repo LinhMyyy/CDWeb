@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+
+<meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+    <meta charset="UTF-8"/>
+    <title>Simple Store</title>
+    <meta name="description"/>
+    <meta name="keywords"/>
+    <link th:href="@{web/shop292/files/simple.png}" rel="shortcut icon" type="image/x-icon"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="fb:app_id" content="227481454296289"/>
+
+    <meta content="vi_VN" property="og:locale"/>
+    <meta content="website" property="og:type"/>
+    <meta content="Simple Store" property="og:title"/>
+    <meta property="og:description"/>
+    <meta content="http://runecom50.runtime.vn" property="og:image"/>
+    <meta content="http://runecom50.runtime.vn/trang-chu.html" property="og:url"/>
+    <meta property="og:site_name"/>
+
+    <link th:href="@{web/Scripts/bootstrap/css/bootstrap.min.css}" rel="stylesheet"/>
+    <link th:href="@{web/App_Themes/font-awesome.min.css}" rel="stylesheet"/>
+    <link th:href="@{web/App_Themes/common.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{web/App_Themes/animate.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{web/Scripts/jQuery-ui/jquery-ui.min.css}" rel="stylesheet" type="text/css"/>
+
+    <script th:src="@{web/Scripts/jQuery/jquery-2.1.4.min.js}" type="text/javascript"></script>
+    <script th:src="@{web/Scripts/jQuery/jquery-migrate-1.2.1.min.js}" type="text/javascript"></script>
+    <script th:src="@{web/Scripts/bootstrap/js/bootstrap.min.js}"></script>
+    <script th:src="@{web/Scripts/jQuery-ui/jquery-ui.min.js}" type="text/javascript"></script>
+
+    <script th:src="@{web/Scripts/lazyLoad/jquery.lazyload.min.js}" type="text/javascript"></script>
+
+    <link th:href="@{web/App_Themes/RUN003C4/style.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{web/App_Themes/RUN003/responsive.css}" rel="stylesheet" type="text/css"/>
+    <script th:src="@{web/Scripts/myJS/ajax-san-pham.js}"></script>
+
+</head>
+<body ng-app="appMain" style="">
+<div class="wrapper page-home">
+
+    <div th:insert="~{web/_header :: header}"></div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+            </div>
+            <div class="col-md-9">
+
+                <!--Begin-->
+                <link th:href="@{web/Scripts/flexSlider/flexslider.css}" rel="stylesheet" type="text/css"/>
+                <script th:src="@{web/Scripts/flexSlider/jquery.flexslider-min.js}" type="text/javascript"></script>
+                <div class="flexslider slideshow-content" id="bannerheaderhome">
+                    <ul class="slides">
+
+                        <th:block th:each="banner:${bannerlist}">
+                            <li>
+                                <a href="#">
+                                    <img th:src="${banner.url}" class="lazy" style="height: 350px"/>
+                                </a>
+                            </li>
+                        </th:block>
+                    </ul>
+                </div>
+                <script type="text/javascript">
+                    $(document).ready(function () {
+                        $('#bannerheaderhome').flexslider({
+                            directionNav: true,
+                            controlNav: false,
+                            animation: "slide",
+                            itemHeigh: 270,
+                            itemMargin: 0,
+                            animationSpeed: 700,
+                            slideshowSpeed: 3000
+                        });
+                    });
+                </script>
+                <!--End-->
+            </div>
+        </div>
+    </div>
+
+
+    <div class="main">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <link th:href="@{web/Scripts/owl-carousel/owl.carousel.css}" rel="stylesheet"/>
+                    <link th:href="@{web/Scripts/owl-carousel/owl.theme.css}" rel="stylesheet"/>
+                    <script th:src="@{web/Scripts/owl-carousel/owl.carousel.min.js}"></script>
+                    <!--Begin-->
+                    <section class="product-content" style="margin-top: 20px">
+                        <div class="col-sm-7"></div>
+                        <div class="col-sm-5">
+                            <form class="search" th:action="@{/san-pham}" method="get">
+                                <input type="text" placeholder="Search.." name="title" id="search"
+                                       onkeyup="search_title()">
+                                <button type="submit"><i class="fa fa-search"></i></button>
+                            </form>
+                        </div>
+                    </section>
+                    <section class="product-content">
+                        <h1 class="title clearfix"><span>Đang giảm giá</span></h1>
+                        <div class=" owl-carousel">
+                            <div class="product-slide">
+                                <div class="product-block product-grid clearfix" id="product-slide">
+
+                                    <th:block th:each="product:${discountlist}">
+                                        <div class="product-item-box  ">
+                                            <div class="product-item">
+                                                <div class="image image-resize">
+                                                    <a th:href="@{/chi-tiet-san-pham(id=${product.id})}">
+                                                        <img class="img-responsive" style="height: 152px"
+                                                             th:src="${product.mediaList[0].path}"/>
+                                                    </a>
+                                                    <span class="hot"
+                                                          th:utext=" ${product.discount} ? ${product.getDiscountFormat()}"></span>
+                                                </div>
+                                                <div class="right-block">
+                                                    <h2 class="name">
+                                                        <a th:href="@{/chi-tiet-san-pham(id=${product.id})}"
+                                                           th:utext="${product.title}"></a>
+                                                    </h2>
+                                                    <div class="rating">
+                                                        <div class="rating-1">
+                                                        <span class="rating-img">
+                                                        </span>
+                                                        </div>
+                                                    </div>
+                                                    <th:block th:if="${product.quantity}">
+                                                        <div class="price">
+                                                            <div><span class="price-old"
+                                                                       th:utext="${product.discount}?${product.getPriceFormat()}"></span>
+                                                            </div>
+                                                            <div><span class="price-new"
+                                                                       th:utext="${product.getPriceDiscount()}">
+                                                        </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="button">
+                                                            <a class="btn btn-default "
+                                                               th:href="@{/thanh-toan(id=${product.id})}">Mua ngay</a>
+                                                        </div>
+                                                    </th:block>
+                                                    <th:block th:unless="${product.quantity}">
+                                                        <div class="price">
+                                                            <div><span class="price-old"></span>
+                                                            </div>
+                                                            <div><span class="price-new">Hết hàng</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="button">
+                                                            <a class="btn btn-default "
+                                                               th:href="@{/chi-tiet-san-pham(id=${product.id})}">Chi tiết
+                                                                sản
+                                                                phẩm</a>
+                                                        </div>
+                                                    </th:block>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </th:block>
+                                </div>
+                                <div class="controls boxprevnext">
+                                    <a class="prev prevlogo"><i class="fa fa-angle-left"></i></a>
+                                    <a class="next nextlogo"><i class="fa fa-angle-right"></i></a>
+                                </div>
+                                <div class="text-center ">
+                                    <a class="btn btn-default button-see-more" th:href="@{/san-pham(sale=true)}">Xem
+                                        thêm</a>
+                                </div>
+                            </div>
+                        </div>
+                        <script type="text/javascript">
+                            $(document).ready(function () {
+                                var owlproductslide2 = $("#product-slide");
+                                owlproductslide2.owlCarousel({
+                                    autoPlay: true,
+                                    autoPlay: 5000,
+                                    items: 6,
+                                    slideSpeed: 1000,
+                                    pagination: false,
+                                    itemsDesktop: [1200, 6],
+                                    itemsDesktopSmall: [980, 3],
+                                    itemsTablet: [767, 2],
+                                    itemsMobile: [480, 1]
+                                });
+                                $(".product-slide .nextlogo").click(function () {
+                                    owlproductslide2.trigger('owl.next');
+                                })
+                                $(".product-slide .prevlogo").click(function () {
+                                    owlproductslide2.trigger('owl.prev');
+                                })
+                            });
+                        </script>
+                    </section>
+                    <section class="product-content clearfix">
+                        <h1 class="title clearfix"><span>Sản phẩm HOT</span></h1>
+                        <div class="product-block product-grid clearfix" id="product-hot">
+                            <th:block th:each="product : ${hotlist}">
+                                <div class="col-md-3 col-sm-3 col-xs-6 product-resize product-item-box">
+                                    <div class="product-item">
+                                        <div class="image image-resize">
+                                            <a th:href="@{/chi-tiet-san-pham(id=${product.id})}">
+                                                <img th:src="${product.mediaList[0].path}"
+                                                     style="display: inline-block;height: 252px ">
+                                            </a>
+                                            <span class="hot"
+                                                  th:utext=" ${product.discount} ? ${product.getDiscountFormat()}:  Hot"></span>
+                                        </div>
+                                        <div class="right-block">
+                                            <h2 class="name">
+                                                <a th:href="@{/chi-tiet-san-pham(id=${product.id})}"
+                                                   th:utext="${product.title}"></a>
+                                            </h2>
+                                            <div class="rating">
+                                                <div class="rating-1">
+                                <span class="rating-img">
+                                </span>
+                                                </div>
+                                            </div>
+                                            <th:block th:if="${product.quantity}">
+                                                <div class="price">
+                                                    <div><span class="price-old"
+                                                               th:utext="${product.discount}?${product.getPriceFormat()}"></span>
+                                                    </div>
+                                                    <div><span class="price-new"
+                                                               th:utext="${product.getPriceDiscount()}">
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <div class="button">
+                                                    <a class="btn btn-default "
+                                                       th:href="@{/thanh-toan(id=${product.id})}">Mua ngay</a>
+                                                    <a class="btn btn-default "
+                                                       th:onclick=" 'addCart('+${product.id}+')' ">Thêm giỏ hàng</a>
+                                                </div>
+                                            </th:block>
+                                            <th:block th:unless="${product.quantity}">
+                                                <div class="price">
+                                                    <div><span class="price-old"></span>
+                                                    </div>
+                                                    <div><span class="price-new">Hết hàng</span>
+                                                    </div>
+                                                </div>
+                                                <div class="button">
+                                                    <a class="btn btn-default "
+                                                       th:href="@{/chi-tiet-san-pham(id=${product.id})}">Chi tiết sản
+                                                        phẩm</a>
+                                                </div>
+                                            </th:block>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </th:block>
+                        </div>
+                        <div class="text-center ">
+                            <a class="btn btn-default button-see-more" th:href="@{/san-pham(hot=true)}">Xem thêm</a>
+                        </div>
+                    </section>
+                    <section class="product-content clearfix">
+                        <h1 class="title clearfix"><span>Sản phẩm MỚI</span></h1>
+                        <div class="product-block product-grid clearfix" id="product-new">
+                            <th:block th:each="product : ${newlist}">
+                                <div class="col-md-3 col-sm-3 col-xs-6 product-resize product-item-box">
+                                    <div class="product-item">
+                                        <div class="image image-resize">
+                                            <a th:href="@{/chi-tiet-san-pham(id=${product.id})}">
+                                                <img th:src="${product.mediaList[0].path}"
+                                                     style="display: inline-block;height: 252px ">
+                                            </a>
+                                            <span class="hot"
+                                                  th:utext=" ${product.discount}? ${product.getDiscountFormat()}:Mới "></span>
+                                        </div>
+                                        <div class="right-block">
+                                            <h2 class="name">
+                                                <a th:href="@{/chi-tiet-san-pham(id=${product.id})}"
+                                                   th:utext="${product.title}"></a>
+                                            </h2>
+                                            <div class="rating">
+                                                <div class="rating-1">
+                                <span class="rating-img">
+                                </span>
+                                                </div>
+                                            </div>
+                                            <th:block th:if="${product.quantity}">
+                                                <div class="price">
+                                                    <div><span class="price-old"
+                                                               th:utext="${product.discount}?${product.getPriceFormat()}"></span>
+                                                    </div>
+                                                    <div><span class="price-new"
+                                                               th:utext="${product.getPriceDiscount()}">
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <div class="button">
+                                                    <a class="btn btn-default "
+                                                       th:href="@{/thanh-toan(id=${product.id})}">Mua ngay</a>
+                                                    <a class="btn btn-default "
+                                                       th:onclick=" 'addCart('+${product.id}+')' ">Thêm giỏ hàng</a>
+                                                </div>
+                                            </th:block>
+                                            <th:block th:unless="${product.quantity}">
+                                                <div class="price">
+                                                    <div><span class="price-old"></span>
+                                                    </div>
+                                                    <div><span class="price-new">Hết hàng</span>
+                                                    </div>
+                                                </div>
+                                                <div class="button">
+                                                    <a class="btn btn-default "
+                                                       th:href="@{/chi-tiet-san-pham(id=${product.id})}">Chi tiết sản
+                                                        phẩm</a>
+                                                </div>
+                                            </th:block>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </th:block>
+                        </div>
+                        <div class="text-center ">
+                            <a class="btn btn-default button-see-more" th:href="@{/san-pham(new=true)}">Xem thêm</a>
+                        </div>
+                    </section>
+
+                </div>
+                <!--End-->
+            </div>
+        </div>
+    </div>
+
+    <div th:insert="~{web/_footer :: footer}"></div>
+
+</div>
+
+
+<a class="back-to-top" href="#" style="display: inline;">
+    <i class="fa fa-angle-up">
+    </i>
+</a>
+
+
+</body>
+<script type="text/javascript">
+    $(".header-content").css({"background": 'url(web/shop292/images/DLF.jpg)  top center'});
+    $("html").addClass('');
+    $(document).ready(function () {
+        $("img.lazy-img").each(function () {
+
+        });
+        $("img.lazy-img").lazyload({
+            effect: "fadeIn",
+            threshold: 200
+        });
+    });
+
+
+</script>
+
+
+</html>
+
+

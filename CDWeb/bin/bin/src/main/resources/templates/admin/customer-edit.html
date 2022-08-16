@@ -1,0 +1,119 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Dashboard V.1 | Nalika - Material Admin Template</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- favicon
+            ============================================ -->
+
+</head>
+<style>
+    h3 {
+        color: white;
+    }
+</style>
+<body>
+<!-- NƠI GẮN LINK VÀO -->
+<div th:insert="~{admin/linkAdm :: links_admin}"></div>
+<!--[if lt IE 8]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+    your browser</a> to improve your experience.</p>
+<![endif]-->
+
+
+<div th:insert="~{admin/header :: header_admin}"></div>
+<script type="text/javascript" th:src="@{web/Scripts/myJS/check.js}"></script>
+
+<div class="all-content-wrapper">
+    <!-- Single pro tab start-->
+    <div class="single-product-tab-area mg-b-30">
+        <!-- Single pro tab review Start-->
+        <div class="single-pro-review-area">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="review-tab-pro-inner">
+                            <ul id="myTab3" class="tab-review-design">
+                                <li class="active"><a href="#"> <i
+                                        class="icon nalika-edit" aria-hidden="true"> </i> Chỉnh sửa
+                                    người dùng
+                                </a></li>
+                            </ul>
+                            <div id="myTabContent" class="tab-content custom-product-edit">
+                                <div class="product-tab-list tab-pane fade active in"
+                                     id="description">
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                            <!-- 	<form method="post" modelAttribute="user" action=""> -->
+                                            <form method="POST"
+                                                  onsubmit="return vadidateForm()"
+                                                  th:action="@{/admin-editUser}">
+                                                <input type="hidden" th:value="${user.id}"
+                                                       name="id">
+                                                * Email: <label th:utext="${user.email}"></label>
+                                                <input type="hidden" th:value="${user.email}"
+                                                       name="email">
+                                                <br/> * Mật khẩu: <input type="password" id="password" name="password"
+                                                                         onblur="checkPass()"
+                                                                         class="form-control"
+                                            /> <br/>
+                                                <div id="passwordError" style="display: none;color: red">Error</div>
+                                                * Nhập lại mật khẩu: <input type="password" id="confirmPassword"
+                                                                            onblur="rewritePass()"
+                                                                            class="form-control"/>
+                                                <div id="rePassError" style="display: none;color: red">Error</div>
+                                                <br/> * Họ tên: <input class="form-control"
+                                                                       name="fullName" id="fullName"
+                                                                       onblur="checkName()"
+                                                                       th:value="${user.fullName}"
+                                                                       type="text"/>
+                                                <div id="nameError" style="display: none;color: red">Error</div>
+                                                <br/> Số điện thoại: <input class="form-control"
+                                                                            th:value="${user.phone}" type="text"/>
+                                                <br/> Địa chỉ: <input name="address"
+                                                                      class="form-control" type="text"
+                                                                      th:value="${user.address}"
+                                            /> <br/>
+                                                <br/> Hoạt động:
+                                                <input type="checkbox" name="isEnabled" value="true">ACTIVE
+                                                <br/> Phân quyền:
+                                                <input type="checkbox" name="role" id="roleUser"
+                                                       value="ROLE_USER">ROLE_USER
+                                                <input type="checkbox" name="role" id="roleAdmin"
+                                                       value="ROLE_ADMIN">ROLE_ADMIN
+                                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                    <div class="text-center custom-pro-edt-ds">
+                                                        <button type="submit"
+                                                                class="btn btn-ctl-bt waves-effect waves-light">
+                                                            LƯU
+                                                        </button>
+                                                        <a href="">
+                                                            <button type="button"
+                                                                    class="btn btn-ctl-bt waves-effect waves-light">
+                                                                HỦY
+                                                            </button>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--FOOTER -->
+
+<div th:insert="~{admin/footer :: footer_admin}"></div>
+
+</body>
+</html>
